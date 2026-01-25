@@ -1,4 +1,4 @@
-name = "chroma-lattice-worker"
+name = "hscq"
 main = "src/index.js"
 compatibility_date = "2024-01-01"
 
