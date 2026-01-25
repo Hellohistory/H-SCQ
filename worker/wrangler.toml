@@ -1,0 +1,12 @@
+name = "chroma-lattice-worker"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[build]
+command = "cd .. && zig build"
+watch_dir = ".."
+
+[[rules]]
+type = "CompiledWasm"
+globs = ["**/*.wasm"]
+fallthrough = true
