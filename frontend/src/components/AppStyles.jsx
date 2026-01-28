@@ -30,7 +30,6 @@ export default function AppStyles() {
         position: relative;
       }
 
-      /* 错误提示条样式 */
       .error-toast {
         position: absolute;
         top: 1rem;

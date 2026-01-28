@@ -31,7 +31,7 @@ export default function Sidebar({
           <div className="file-meta">
             <div className="file-name">{imageInfo.name}</div>
             <div>
-              {imageInfo.width} × {imageInfo.height}px
+              {imageInfo.width} x {imageInfo.height}px
             </div>
             <div>{(imageInfo.byteLength / 1024).toFixed(1)} KB</div>
           </div>

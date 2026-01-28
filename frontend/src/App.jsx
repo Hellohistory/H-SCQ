@@ -12,35 +12,34 @@ function App() {
   };
 
   return (
-      <div className="layout">
-        <AppStyles />
+    <div className="layout">
+      <AppStyles />
 
-        {/* 错误提示条 - 简单的 UI 反馈 */}
-        {state.error && (
-            <div className="error-toast" onClick={actions.clearError}>
-              <span>Error: {state.error}</span>
-              <button className="close-btn">×</button>
-            </div>
-        )}
+      {state.error && (
+        <div className="error-toast" onClick={actions.clearError}>
+          <span>Error: {state.error}</span>
+          <button className="close-btn">x</button>
+        </div>
+      )}
 
-        <Sidebar
-            loading={state.loading}
-            onRun={actions.runQuantization}
-            meta={state.meta}
-            displayedPalette={state.displayedPalette}
-            sortMode={state.sortMode}
-            onSortModeChange={actions.setSortMode}
-            selectedColor={state.selectedColor}
-            onImageChange={handleImageChange}
-            imageInfo={state.imageInfo}
-        />
+      <Sidebar
+        loading={state.loading}
+        onRun={actions.runQuantization}
+        meta={state.meta}
+        displayedPalette={state.displayedPalette}
+        sortMode={state.sortMode}
+        onSortModeChange={actions.setSortMode}
+        selectedColor={state.selectedColor}
+        onImageChange={handleImageChange}
+        imageInfo={state.imageInfo}
+      />
 
-        <MainStage
-            displayedPalette={state.displayedPalette}
-            selectedColor={state.selectedColor}
-            onSelectColor={actions.setSelectedColor}
-        />
-      </div>
+      <MainStage
+        displayedPalette={state.displayedPalette}
+        selectedColor={state.selectedColor}
+        onSelectColor={actions.setSelectedColor}
+      />
+    </div>
   );
 }
 
