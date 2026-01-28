@@ -4,7 +4,7 @@ import MainStage from "./components/MainStage";
 import Sidebar from "./components/Sidebar";
 import { getHue, getLuminance, rgbToHex } from "./utils/color";
 
-const ENDPOINT = "http://localhost:8787";
+const ENDPOINT = "https://hscq.nestools.net";
 
 function App() {
   const [palette, setPalette] = useState([]);
