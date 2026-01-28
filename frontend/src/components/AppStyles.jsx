@@ -7,6 +7,8 @@ export default function AppStyles() {
         --text-primary: #e4e4e7;
         --text-secondary: #a1a1aa;
         --accent: #3b82f6;
+        --error-bg: #451a1a;
+        --error-text: #f87171;
         --border: #27272a;
         --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
         --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
@@ -25,6 +27,42 @@ export default function AppStyles() {
         grid-template-columns: 320px 1fr;
         height: 100vh;
         overflow: hidden;
+        position: relative;
+      }
+
+      /* 错误提示条样式 */
+      .error-toast {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: var(--error-bg);
+        color: var(--error-text);
+        padding: 0.75rem 1rem;
+        border-radius: 6px;
+        border: 1px solid var(--error-text);
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        z-index: 1000;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        animation: slideIn 0.3s ease-out;
+      }
+
+      @keyframes slideIn {
+        from { transform: translateY(-20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+
+      .close-btn {
+        background: none;
+        border: none;
+        color: var(--error-text);
+        font-size: 1.2rem;
+        cursor: pointer;
+        padding: 0;
+        line-height: 1;
       }
 
       .sidebar {
