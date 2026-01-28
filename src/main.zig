@@ -31,6 +31,9 @@ const MAX_PALETTE_SIZE = 1000;
 var palette_buffer: [MAX_PALETTE_SIZE]PaletteEntry = undefined;
 var palette_count: usize = 0;
 
+const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
+var image_buffer: [MAX_IMAGE_BYTES]u8 = undefined;
+
 fn arena_reset() void {
     node_idx = 0;
     palette_count = 0;
@@ -111,37 +114,32 @@ export fn get_result_pointer() [*]PaletteEntry {
     return &palette_buffer;
 }
 
-export fn run_octree() usize {
+export fn alloc_image_buffer(size: usize) usize {
+    if (size > MAX_IMAGE_BYTES) return 0;
+    return @intFromPtr(&image_buffer);
+}
+
+export fn run_octree(image_ptr: usize, image_len: usize) usize {
     arena_reset();
+
+    if (image_ptr == 0 or image_len == 0) return 0;
 
     const root_opt = arena_alloc();
     if (root_opt == null) return 0;
     const root = root_opt.?;
 
-    const width: usize = 256;
-    const height: usize = 256;
+    const bytes = @as([*]const u8, @ptrFromInt(image_ptr))[0..image_len];
+    const pixel_count = bytes.len / 4;
 
-    var y: usize = 0;
-    while (y < height) : (y += 1) {
-        var x: usize = 0;
-        while (x < width) : (x += 1) {
-            var p: Pixel = undefined;
-            const t: f32 = @as(f32, @floatFromInt(y)) / @as(f32, @floatFromInt(height));
-
-            if (t < 0.5) {
-                const local_t = t * 2.0;
-                p.r = @intFromFloat(local_t * 255.0);
-                p.g = 0;
-                p.b = @intFromFloat((1.0 - local_t) * 255.0);
-            } else {
-                const local_t = (t - 0.5) * 2.0;
-                p.r = 255;
-                p.g = @intFromFloat(local_t * 255.0);
-                p.b = 0;
-            }
-
-            insert_color(root, p, 0);
-        }
+    var idx: usize = 0;
+    while (idx < pixel_count) : (idx += 1) {
+        const base = idx * 4;
+        const p = Pixel{
+            .r = bytes[base + 0],
+            .g = bytes[base + 1],
+            .b = bytes[base + 2],
+        };
+        insert_color(root, p, 0);
     }
 
     extract_palette(root);

@@ -86,6 +86,34 @@ export default function AppStyles() {
         cursor: not-allowed;
       }
 
+      .file-input {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid var(--border);
+        color: var(--text-secondary);
+        padding: 0.5rem;
+        border-radius: 6px;
+        font-size: 0.85rem;
+      }
+
+      .file-meta {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid var(--border);
+        padding: 0.6rem;
+        border-radius: 6px;
+      }
+
+      .file-name {
+        color: var(--text-primary);
+        font-weight: 600;
+        word-break: break-all;
+      }
+
       .stats-panel {
         background: rgba(0, 0, 0, 0.2);
         border-radius: 6px;

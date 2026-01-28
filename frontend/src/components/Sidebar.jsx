@@ -8,12 +8,34 @@ export default function Sidebar({
   sortMode,
   onSortModeChange,
   selectedColor,
+  onImageChange,
+  imageInfo,
 }) {
   return (
     <aside className="sidebar">
       <div className="brand">
         <h1>Chroma Lattice</h1>
         <span>Octree Quantization Engine</span>
+      </div>
+
+      <div className="control-group">
+        <div className="label">Image Input</div>
+        <input
+          className="file-input"
+          type="file"
+          accept="image/*"
+          onChange={onImageChange}
+          disabled={loading}
+        />
+        {imageInfo && (
+          <div className="file-meta">
+            <div className="file-name">{imageInfo.name}</div>
+            <div>
+              {imageInfo.width} × {imageInfo.height}px
+            </div>
+            <div>{(imageInfo.byteLength / 1024).toFixed(1)} KB</div>
+          </div>
+        )}
       </div>
 
       <div className="control-group">
